@@ -10,8 +10,8 @@ WorldInfo {
   basicTimeStep 16
 }
 Viewpoint {
-  orientation -0.278683224535468 0.2586968012554628 0.9248846551774472 1.6700431620207923
-  position -0.257404435639042 -1.8885218910587764 1.2108887579046888
+  orientation -0.2197321481926271 0.2834729240369779 0.9334671308560248 1.3178944628172071
+  position -0.4512990652941457 -1.8922299369442799 0.8581964177359422
 }
 TexturedBackground {
 }
@@ -27,7 +27,7 @@ WoodenBox {
   mass 0.2
 }
 WoodenBox {
-  translation -0.167614 -0.146056 0.05
+  translation 0.356809 -0.364712 0.05
   rotation 0 0 1 1.0472
   name "wooden box(2)"
   size 0.1 0.1 0.1
@@ -47,7 +47,26 @@ WoodenBox {
   mass 0.2
 }
 E-puck {
-  translation -0.53 0.2 0
-  rotation 0 0 1 -1.047195307179586
+  translation -0.229948 -0.0347017 6.66134e-16
+  rotation 0 0 1 2.24093e-06
   controller "epuck_go_forward"
+}
+Solid {
+  translation 0 0 0.19
+  rotation 0 1 0 0
+  children [
+    Shape {
+      appearance PBRAppearance {
+        roughness 1
+        metalness 0
+      }
+      geometry DEF BALL_GEOMETRY Sphere {
+        radius 0.05
+        subdivision 2
+      }
+    }
+  ]
+  boundingObject USE BALL_GEOMETRY
+  physics Physics {
+  }
 }
