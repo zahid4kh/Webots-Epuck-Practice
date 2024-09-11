@@ -11,6 +11,7 @@
  * <webots/motor.h>, etc.
  */
 #include <webots/robot.h>
+#include <webots/motor.h>
 
 /*
  * You may want to add macros here.
