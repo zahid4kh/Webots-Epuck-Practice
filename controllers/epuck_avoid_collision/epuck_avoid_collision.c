@@ -1,8 +1,8 @@
 /*
  * File:          epuck_avoid_collision.c
- * Date:
+ * Date:          11/09/2024
  * Description:
- * Author:
+ * Author:        ZAHID
  * Modifications:
  */
 
