@@ -5,6 +5,7 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/project
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/factory/containers/protos/WoodenBox.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/gctronic/e-puck/protos/E-puck.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/Floor.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/appearances/protos/OldSteel.proto"
 
 WorldInfo {
   basicTimeStep 16
@@ -56,9 +57,7 @@ DEF SOLID_BALL Solid {
   rotation 0 1 0 0
   children [
     DEF BALL_SHAPE Shape {
-      appearance PBRAppearance {
-        roughness 1
-        metalness 0
+      appearance OldSteel {
       }
       geometry DEF BALL_GEOMETRY Sphere {
         radius 0.05
@@ -75,6 +74,8 @@ DEF WALL_ONE Solid {
   children [
     DEF WALL_SHAPE Shape {
       appearance PBRAppearance {
+        baseColor 0.109804 0.443137 0.847059
+        roughness 0.5
         metalness 0
       }
       geometry Box {
