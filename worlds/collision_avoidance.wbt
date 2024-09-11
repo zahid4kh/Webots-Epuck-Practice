@@ -1,0 +1,116 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/factory/containers/protos/WoodenBox.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/gctronic/e-puck/protos/E-puck.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/Floor.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/appearances/protos/OldSteel.proto"
+
+WorldInfo {
+  basicTimeStep 16
+}
+Viewpoint {
+  orientation -0.27207246729089984 0.48030004612657073 0.8338395758376166 1.1934656780987747
+  position -0.7765182615964942 -1.5878207051288047 1.1798323163308788
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+Floor {
+  size 1 1
+}
+WoodenBox {
+  translation 0.141136 0.230056 0.05
+  rotation 0 0 1 0.785398
+  size 0.1 0.1 0.1
+  mass 0.2
+}
+WoodenBox {
+  translation 0.106222 -0.224066 0.05
+  rotation 0 0 1 1.0472
+  name "wooden box(2)"
+  size 0.1 0.1 0.1
+  mass 0.2
+}
+WoodenBox {
+  translation -0.309532 -0.28342 0.05
+  rotation 0 0 1 -0.261795307179586
+  name "wooden box(1)"
+  size 0.1 0.1 0.1
+  mass 0.2
+}
+WoodenBox {
+  translation -0.313215 0.178049 0.05
+  name "wooden box(3)"
+  size 0.1 0.1 0.1
+  mass 0.2
+}
+E-puck {
+  translation -0.229948 -0.0347017 6.66134e-16
+  rotation 0 0 1 2.24093e-06
+  controller "epuck_avoid_collision"
+}
+DEF SOLID_BALL Solid {
+  translation 0 0 0.19
+  rotation 0 1 0 0
+  children [
+    DEF BALL_SHAPE Shape {
+      appearance OldSteel {
+      }
+      geometry DEF BALL_GEOMETRY Sphere {
+        radius 0.05
+        subdivision 2
+      }
+    }
+  ]
+  boundingObject USE BALL_GEOMETRY
+  physics Physics {
+  }
+}
+DEF WALL_ONE Solid {
+  translation 0 -0.5 0.05
+  children [
+    DEF WALL_SHAPE Shape {
+      appearance PBRAppearance {
+        baseColor 0.109804 0.443137 0.847059
+        roughness 0.5
+        metalness 0
+      }
+      geometry Box {
+        size 1 0.01 0.1
+      }
+    }
+  ]
+  name "solid(1)"
+  boundingObject Box {
+    size 0.1 0.1 0.1
+  }
+}
+DEF WALL_TWO Solid {
+  translation 0 0.5 0.05
+  children [
+    USE WALL_SHAPE
+  ]
+  name "solid(2)"
+  boundingObject USE WALL_SHAPE
+}
+DEF WALL_THREE Solid {
+  translation 0.5 1.83656e-06 0.05
+  rotation 0 0 1 1.5708
+  children [
+    USE WALL_SHAPE
+  ]
+  name "solid(3)"
+  boundingObject USE WALL_SHAPE
+}
+DEF WALL_FOUR Solid {
+  translation -0.5 -1.83656e-06 0.05
+  rotation 0 0 1 1.5708
+  children [
+    USE WALL_SHAPE
+  ]
+  name "solid(4)"
+  boundingObject USE WALL_SHAPE
+}
