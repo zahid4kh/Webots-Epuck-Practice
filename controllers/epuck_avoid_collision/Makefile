@@ -68,5 +68,14 @@
 ### Do not modify: this includes Webots global Makefile.include
 null :=
 space := $(null) $(null)
-WEBOTS_HOME_PATH?=$(subst $(space),\ ,$(strip $(subst \,/,$(WEBOTS_HOME))))
+
+C_SOURCES = epuck_avoid_collision.c
+
+INCLUDE = -I/usr/local/webots/include/controller/c/webots/
+
+LIBRARIES = -L/usr/local/webots/lib/controller -lController
+
+###WEBOTS_HOME_PATH?=$(subst $(space),\ ,$(strip $(subst \,/,$(WEBOTS_HOME))))
+
+WEBOTS_HOME_PATH?=/usr/local/webots
 include $(WEBOTS_HOME_PATH)/resources/Makefile.include
