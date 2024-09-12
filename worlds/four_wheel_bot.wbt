@@ -5,11 +5,10 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/project
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/Floor.proto"
 
 WorldInfo {
-  basicTimeStep 16
 }
 Viewpoint {
-  orientation 0.3552231104160413 0.17767159190174675 -0.9177414381281104 2.3557081227446957
-  position 0.8234809944820207 1.0562728392112335 1.1652463096984857
+  orientation -0.35558883202744823 -0.1872072743021927 0.9157019269313015 4.040036157585244
+  position 0.7157970478166039 1.1844002545632553 1.169676160456852
 }
 TexturedBackground {
 }
@@ -65,7 +64,7 @@ DEF WALL_FOUR Solid {
   boundingObject USE WALL_SHAPE
 }
 Robot {
-  translation 0 0 0.05
+  translation 0 5.98507e-10 0.0395066
   children [
     DistanceSensor {
       translation 0.1 0.03 0
@@ -112,7 +111,7 @@ Robot {
       ]
       endPoint DEF WHEEL1 Solid {
         translation 0.05 0.06 0
-        rotation 1 0 0 1.5707996938995714
+        rotation 1 7.154688896549444e-10 -7.154711662851767e-10 1.5707996938995654
         children [
           DEF WHEEL Shape {
             appearance PBRAppearance {
@@ -128,6 +127,8 @@ Robot {
         ]
         boundingObject USE WHEEL
         physics DEF WHEEL_PH Physics {
+          density -1
+          mass 1
         }
       }
     }
@@ -142,8 +143,8 @@ Robot {
         }
       ]
       endPoint Solid {
-        translation -0.05000000001576792 0.06000000000181905 1.9581845757005774e-06
-        rotation 1 7.850449076788099e-17 7.850449076788099e-17 1.5707996938995736
+        translation -0.050000000015766544 0.06000000000181905 1.9581845757018534e-06
+        rotation 1 3.489107755786346e-10 -3.489117961370145e-10 1.570799693899566
         children [
           USE WHEEL
         ]
@@ -163,8 +164,8 @@ Robot {
         }
       ]
       endPoint Solid {
-        translation 0.04999999998429344 -0.06000000000217917 1.9736596831923525e-06
-        rotation 0.9999999999999999 5.082627160259162e-13 5.119519834492018e-13 1.570799999993151
+        translation 0.04999999998429213 -0.06000000000217917 1.9736596831923457e-06
+        rotation 0.9999999999999999 -3.3017136149047913e-10 3.311927908434411e-10 1.5707999999931344
         children [
           USE WHEEL
         ]
@@ -185,7 +186,7 @@ Robot {
       ]
       endPoint Solid {
         translation -0.05 -0.06 0
-        rotation 0.9999999999999999 0 0 1.5707999999931548
+        rotation 0.9999999999999999 -6.363204274610902e-10 6.363227647967321e-10 1.570799999993136
         children [
           USE WHEEL
         ]
@@ -200,4 +201,5 @@ Robot {
     density -1
     mass 1
   }
+  controller "four_wheel_bot"
 }

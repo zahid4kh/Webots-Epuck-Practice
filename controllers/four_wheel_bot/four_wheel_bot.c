@@ -9,6 +9,7 @@
 #include <webots/robot.h>
 #include <webots/motor.h>
 #include <webots/distance_sensor.h>
+#include <stdio.h>
 
 #define TIME_STEP 64
 
@@ -34,8 +35,8 @@ int main(int argc, char **argv) {
 
   while (wb_robot_step(TIME_STEP) != -1) {
     
-    double left_speed = -1.0;
-    double right_speed = -1.0;
+    double left_speed = 1.0;
+    double right_speed = 1.0;
 
     if (obstacle_counter > 0){
       obstacle_counter--;
@@ -47,22 +48,19 @@ int main(int argc, char **argv) {
       for (i = 0; i < 2; i++){
         ds_values[i] = wb_distance_sensor_get_value(ds[i]);
       }
+      printf("Obstacle counter is %d\n", obstacle_counter);
+      printf("Left sensor: %f, Right sensor: %f\n", ds_values[0], ds_values[1]);
+
       if (ds_values[0] < 950.0 || ds_values[1] < 950.0){
         obstacle_counter = 100;
       }
-
-      wb_motor_set_velocity(wheels[0], left_speed);
-      wb_motor_set_velocity(wheels[1], left_speed);
-      wb_motor_set_velocity(wheels[2], right_speed);
-      wb_motor_set_velocity(wheels[3], right_speed);
     }
-
+    wb_motor_set_velocity(wheels[0], left_speed);
+    wb_motor_set_velocity(wheels[1], left_speed);
+    wb_motor_set_velocity(wheels[2], right_speed);
+    wb_motor_set_velocity(wheels[3], right_speed);
   };
 
-  /* Enter your cleanup code here */
-
-  /* This is necessary to cleanup webots resources */
   wb_robot_cleanup();
-
   return 0;
 }
