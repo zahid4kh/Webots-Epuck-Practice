@@ -1,0 +1,149 @@
+#VRML_SIM R2023b utf8
+
+
+
+PROTO fourWheelsBot [
+  protoFields
+]
+{
+  Robot {
+  translation 0 5.98507e-10 0.0395066
+  children [
+    DistanceSensor {
+      translation 0.1 0.03 0
+      rotation 0 0 1 0.3
+      children [
+        DEF SENSOR Shape {
+          appearance PBRAppearance {
+            baseColor 0.101961 0.372549 0.705882
+            metalness 0
+          }
+          geometry Box {
+            size 0.01 0.01 0.01
+          }
+        }
+      ]
+      name "ds_left"
+    }
+    DistanceSensor {
+      translation 0.1 -0.03 0
+      rotation 0 0 1 -0.3
+      children [
+        USE SENSOR
+      ]
+      name "ds_right"
+    }
+    DEF CAR_BODY Shape {
+      appearance PBRAppearance {
+        baseColor 0.878431 0.105882 0.141176
+        metalness 0
+      }
+      geometry Box {
+        size 0.2 0.1 0.05
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0.05 0.06 0
+      }
+      device [
+        RotationalMotor {
+          name "wheel0"
+        }
+      ]
+      endPoint DEF WHEEL1 Solid {
+        translation 0.05 0.06 0
+        rotation 1 7.154688896549444e-10 -7.154711662851767e-10 1.5707996938995654
+        children [
+          DEF WHEEL Shape {
+            appearance PBRAppearance {
+              baseColor 0.964706 0.827451 0.176471
+              metalness 0
+            }
+            geometry Cylinder {
+              height 0.02
+              radius 0.04
+              subdivision 24
+            }
+          }
+        ]
+        boundingObject USE WHEEL
+        physics DEF WHEEL_PH Physics {
+          density -1
+          mass 1
+        }
+      }
+    }
+    DEF WHEEL2 HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor -0.05 0.06 0
+      }
+      device [
+        RotationalMotor {
+          name "wheel1"
+        }
+      ]
+      endPoint Solid {
+        translation -0.050000000015766544 0.06000000000181905 1.9581845757018534e-06
+        rotation 1 3.489107755786346e-10 -3.489117961370145e-10 1.570799693899566
+        children [
+          USE WHEEL
+        ]
+        name "solid(1)"
+        boundingObject USE WHEEL
+        physics USE WHEEL_PH
+      }
+    }
+    DEF WHEEL3 HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0.05 -0.06 0
+      }
+      device [
+        RotationalMotor {
+          name "wheel2"
+        }
+      ]
+      endPoint Solid {
+        translation 0.04999999998429213 -0.06000000000217917 1.9736596831923457e-06
+        rotation 0.9999999999999999 -3.3017136149047913e-10 3.311927908434411e-10 1.5707999999931344
+        children [
+          USE WHEEL
+        ]
+        name "solid(2)"
+        boundingObject USE WHEEL
+        physics USE WHEEL_PH
+      }
+    }
+    DEF WHEEL4 HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor -0.05 -0.06 0
+      }
+      device [
+        RotationalMotor {
+          name "wheel3"
+        }
+      ]
+      endPoint Solid {
+        translation -0.05 -0.06 0
+        rotation 0.9999999999999999 -6.363204274610902e-10 6.363227647967321e-10 1.570799999993136
+        children [
+          USE WHEEL
+        ]
+        name "solid(3)"
+        boundingObject USE WHEEL
+        physics USE WHEEL_PH
+      }
+    }
+  ]
+  boundingObject USE CAR_BODY
+  physics Physics {
+    density -1
+    mass 1
+  }
+  controller "four_wheel_bot"
+  }
+}
