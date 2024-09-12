@@ -3,12 +3,13 @@
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/Floor.proto"
+EXTERNPROTO "../protos/fourWheelsBot.proto"
 
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.35558883202744823 -0.1872072743021927 0.9157019269313015 4.040036157585244
-  position 0.7157970478166039 1.1844002545632553 1.169676160456852
+  orientation -0.33818108452249146 -0.17161405306782115 0.9253011244242744 4.019593971010341
+  position 0.7782385735200058 1.2096485194053066 1.1212103680937273
 }
 TexturedBackground {
 }
@@ -64,7 +65,7 @@ DEF WALL_FOUR Solid {
   boundingObject USE WALL_SHAPE
 }
 Robot {
-  translation 0 5.98507e-10 0.0395066
+  translation 0 -0.2 0.04
   children [
     DistanceSensor {
       translation 0.1 0.03 0
@@ -202,4 +203,6 @@ Robot {
     mass 1
   }
   controller "four_wheel_bot"
+}
+fourWheelsBot {
 }

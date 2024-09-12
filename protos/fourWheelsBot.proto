@@ -3,11 +3,14 @@
 
 
 PROTO fourWheelsBot [
-  protoFields
+    field SFVec3f       translation 0 0 0.04
+    field SFRotation    rotation    0 0 1 0
+    field SFFloat       bodyMass    1
 ]
 {
   Robot {
-  translation 0 5.98507e-10 0.0395066
+  translation IS translation
+  rotation IS rotation
   children [
     DistanceSensor {
       translation 0.1 0.03 0
@@ -142,7 +145,7 @@ PROTO fourWheelsBot [
   boundingObject USE CAR_BODY
   physics Physics {
     density -1
-    mass 1
+    mass IS bodyMass
   }
   controller "four_wheel_bot"
   }
