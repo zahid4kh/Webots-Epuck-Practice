@@ -8,8 +8,8 @@ WorldInfo {
   basicTimeStep 16
 }
 Viewpoint {
-  orientation -0.5773502691896258 0.5773502691896258 0.5773502691896258 2.0944
-  position 0.15184680444097565 0.022025467882728453 1.595861030635967
+  orientation 0.3552231104160413 0.17767159190174675 -0.9177414381281104 2.3557081227446957
+  position 0.8234809944820207 1.0562728392112335 1.1652463096984857
 }
 TexturedBackground {
 }
@@ -17,6 +17,7 @@ TexturedBackgroundLight {
 }
 Floor {
   size 1 1
+  tileSize 0.3 0.3
 }
 DEF WALL_ONE Solid {
   translation 0 -0.5 0.05
@@ -67,8 +68,8 @@ Robot {
   translation 0 0 0.05
   children [
     DistanceSensor {
-      translation 0.1 0.017 0
-      rotation 0 0 1 0.13090030610042527
+      translation 0.1 0.03 0
+      rotation 0 0 1 0.3
       children [
         DEF SENSOR Shape {
           appearance PBRAppearance {
@@ -80,15 +81,15 @@ Robot {
           }
         }
       ]
-      boundingObject USE SENSOR
+      name "ds_left"
     }
     DistanceSensor {
-      translation 0.1 -0.017 0
-      rotation 0 0 1 -0.1308996938995747
+      translation 0.1 -0.03 0
+      rotation 0 0 1 -0.3
       children [
         USE SENSOR
       ]
-      name "distance sensor(1)"
+      name "ds_right"
     }
     DEF CAR_BODY Shape {
       appearance PBRAppearance {
@@ -102,16 +103,16 @@ Robot {
     HingeJoint {
       jointParameters HingeJointParameters {
         axis 0 1 0
-        anchor 0.05 -0.06 0
+        anchor 0.05 0.06 0
       }
       device [
         RotationalMotor {
-          name "wheel1"
+          name "wheel0"
         }
       ]
       endPoint DEF WHEEL1 Solid {
         translation 0.05 0.06 0
-        rotation 1 0 0 1.5708
+        rotation 1 0 0 1.5707996938995714
         children [
           DEF WHEEL Shape {
             appearance PBRAppearance {
@@ -121,6 +122,7 @@ Robot {
             geometry Cylinder {
               height 0.02
               radius 0.04
+              subdivision 24
             }
           }
         ]
@@ -136,12 +138,12 @@ Robot {
       }
       device [
         RotationalMotor {
-          name "wheel2"
+          name "wheel1"
         }
       ]
       endPoint Solid {
-        translation -0.05 0.06 0
-        rotation 1 0 0 1.5708
+        translation -0.05000000001576792 0.06000000000181905 1.9581845757005774e-06
+        rotation 1 7.850449076788099e-17 7.850449076788099e-17 1.5707996938995736
         children [
           USE WHEEL
         ]
@@ -157,12 +159,12 @@ Robot {
       }
       device [
         RotationalMotor {
-          name "wheel3"
+          name "wheel2"
         }
       ]
       endPoint Solid {
-        translation 0.05 -0.06 0
-        rotation 1 0 0 1.5708
+        translation 0.04999999998429344 -0.06000000000217917 1.9736596831923525e-06
+        rotation 0.9999999999999999 5.082627160259162e-13 5.119519834492018e-13 1.570799999993151
         children [
           USE WHEEL
         ]
@@ -178,12 +180,12 @@ Robot {
       }
       device [
         RotationalMotor {
-          name "wheel4"
+          name "wheel3"
         }
       ]
       endPoint Solid {
         translation -0.05 -0.06 0
-        rotation 1 0 0 1.5708
+        rotation 0.9999999999999999 0 0 1.5707999999931548
         children [
           USE WHEEL
         ]
@@ -195,5 +197,7 @@ Robot {
   ]
   boundingObject USE CAR_BODY
   physics Physics {
+    density -1
+    mass 1
   }
 }

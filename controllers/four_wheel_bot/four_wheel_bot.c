@@ -1,56 +1,62 @@
 /*
  * File:          four_wheel_bot.c
- * Date:
+ * Date:          11/09/2024
  * Description:
- * Author:
+ * Author:        ZAHID
  * Modifications:
  */
 
-/*
- * You may need to add include files like <webots/distance_sensor.h> or
- * <webots/motor.h>, etc.
- */
 #include <webots/robot.h>
 #include <webots/motor.h>
+#include <webots/distance_sensor.h>
 
-/*
- * You may want to add macros here.
- */
 #define TIME_STEP 64
 
-/*
- * This is the main program.
- * The arguments of the main function can be specified by the
- * "controllerArgs" field of the Robot node
- */
 int main(int argc, char **argv) {
-  /* necessary to initialize webots stuff */
   wb_robot_init();
+  int i;
+  bool obstacle_counter = 0;
+  
+  WbDeviceTag wheels[4];
+  char wheel_names[4][8] = {"wheel0", "wheel1", "wheel2", "wheel3"};  
+  for (i = 0; i < 4; i++){
+    wheels[i] = wb_robot_get_device(wheel_names[i]);
+    wb_motor_set_position(wheels[i], INFINITY);
+  }
 
-  /*
-   * You should declare here WbDeviceTag variables for storing
-   * robot devices like this:
-   *  WbDeviceTag my_sensor = wb_robot_get_device("my_sensor");
-   *  WbDeviceTag my_actuator = wb_robot_get_device("my_actuator");
-   */
+  WbDeviceTag ds[2];
+  char ds_names[2][10] = {"ds_left", "ds_right"};
+  for (i = 0; i < 2; i++){
+    ds[i] = wb_robot_get_device(ds_names[i]);
+    wb_distance_sensor_enable(ds[i], TIME_STEP);
+  }
 
-  /* main loop
-   * Perform simulation steps of TIME_STEP milliseconds
-   * and leave the loop when the simulation is over
-   */
+
   while (wb_robot_step(TIME_STEP) != -1) {
-    /*
-     * Read the sensors :
-     * Enter here functions to read sensor data, like:
-     *  double val = wb_distance_sensor_get_value(my_sensor);
-     */
+    
+    double left_speed = -1.0;
+    double right_speed = -1.0;
 
-    /* Process sensor data here */
+    if (obstacle_counter > 0){
+      obstacle_counter--;
+      left_speed = 1.0;
+      right_speed = -1.0;
+    } 
+    else {
+      double ds_values[2];
+      for (i = 0; i < 2; i++){
+        ds_values[i] = wb_distance_sensor_get_value(ds[i]);
+      }
+      if (ds_values[0] < 950.0 || ds_values[1] < 950.0){
+        obstacle_counter = 100;
+      }
 
-    /*
-     * Enter here functions to send actuator commands, like:
-     * wb_motor_set_position(my_actuator, 10.0);
-     */
+      wb_motor_set_velocity(wheels[0], left_speed);
+      wb_motor_set_velocity(wheels[1], left_speed);
+      wb_motor_set_velocity(wheels[2], right_speed);
+      wb_motor_set_velocity(wheels[3], right_speed);
+    }
+
   };
 
   /* Enter your cleanup code here */
